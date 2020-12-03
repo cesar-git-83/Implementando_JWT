@@ -31,6 +31,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->post('/auth/login', 'Auth::login');
+
 
 $routes->group('api',['namespace' => 'App\Controllers\API'],function ($routes){
 	$routes -> get('estudiante', 'Estudiante::index');
@@ -50,6 +52,18 @@ $routes->group('api',['namespace' => 'App\Controllers\API'],function ($routes){
 	$routes -> get('grado/edit/(:num)', 'Grado::edit/$1');
 	$routes -> put('grado/update/(:num)', 'Grado::update/$1'); 
 	$routes -> delete('grado/delete/(:num)', 'Grado::delete/$1'); 
+
+	$routes -> get('roles', 'Roles::index');
+	$routes -> post('roles/create', 'Roles::create');
+	$routes -> get('roles/edit/(:num)', 'Roles::edit/$1');
+	$routes -> put('roles/update/(:num)', 'Roles::update/$1'); 
+	$routes -> delete('roles/delete/(:num)', 'Roles::delete/$1'); 
+
+	$routes -> get('usuarios', 'Usuarios::index');
+	$routes -> post('usuarios/create', 'Usuarios::create');
+	$routes -> get('usuarios/edit/(:num)', 'Usuarios::edit/$1');
+	$routes -> put('usuarios/update/(:num)', 'Usuarios::update/$1'); 
+	$routes -> delete('usuarios/delete/(:num)', 'Usuarios::delete/$1'); 
 
 });
 

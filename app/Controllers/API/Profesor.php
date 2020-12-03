@@ -5,7 +5,7 @@ use CodeIgniter\RESTful\ResourceController;
 
 class Profesor extends ResourceController
 {
-    public function __constuct(){
+    public function __construct(){
         $this->model= $this-> setModel(new ProfesorModel());
 
 
