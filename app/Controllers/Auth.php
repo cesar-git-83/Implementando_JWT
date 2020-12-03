@@ -1,5 +1,9 @@
 <?php namespace App\Controllers;
 use codeIgniter\API\ResponseTrait;
+use App\Models\UsuarioModel;
+use Config\Services;
+use Firebase\JWT\JWT;
+
 
 class Auth extends BaseController
 {
