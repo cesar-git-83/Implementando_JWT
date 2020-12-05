@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-function validateAcess($roles, $authHeader){
+function validateAccess($roles, $authHeader){
     
     if (!is_array($roles)) 
     return false;
@@ -15,7 +15,6 @@ function validateAcess($roles, $authHeader){
 
         $arr = explode('', $authHeader);
         $jwt = $arr[1];
-
         $jwt = JWT::decode($jwt, $key, ['HS256']);
 
         $rolModel = new RolModel();

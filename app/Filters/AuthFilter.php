@@ -17,8 +17,10 @@ class AuthFilter implements FilterInterface{
     public function before(RequestInterfase $request, $arguments = null){
 
             try {
+
             $key = Services::getsecretKey();
             $authHeader = $request->getServer('HTTP_AUTHORIZATION');
+            
             if ($authHeader == null) {
                 return Services::response()->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED, 'No se ha enviado el JWT autorizado');
 
