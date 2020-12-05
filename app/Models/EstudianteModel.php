@@ -11,8 +11,8 @@ class EstudianteModel extends Model
 
     protected $allowedFields    = ['nombre','apellido','dui','genero','carnet','grado_id'];
     protected $useTimestamps    = true;
-    protected $createdFields    = 'created_at';
-    protected $updatedFields    = 'updated_at';
+    protected $createdFields    = 'create_at';
+    protected $updatedFields    = 'update_at';
     protected $validationRules  = [
         'nombre'        => 'required|alpha_space|min_length[3]|max_leght[75]',
         'apellido'      => 'required|alpha_space|min_length[3]|max_leght[75]',

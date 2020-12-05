@@ -11,8 +11,8 @@ class GradoModel extends Model
 
     protected $allowedFields    = ['grado','seccion','profesor_id'];
     protected $useTimestamps    = true;
-    protected $createdFields    = 'created_at';
-    protected $updatedFields    = 'updated_at';
+    protected $createdFields    = 'create_at';
+    protected $updatedFields    = 'update_at';
     protected $validationRules  = [
         'grado'        => 'required|alpha_space|min_length[3]|max_leght[60]',
         'seccion'      => 'required|alpha_space|min_length[2]|max_leght[2]',

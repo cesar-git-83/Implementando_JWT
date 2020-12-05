@@ -22,11 +22,5 @@ class MyCustomRules{
         $grado = $model->find($id);
         return $grado == null? false : true;
     }
-    public function is_valid_usuario(int $id):bool
-    {
-        $model = new UsuarioModel();
-        $usuario = $model->find($id);
-        return $usuario == null? false : true;
-    }
 
 }
