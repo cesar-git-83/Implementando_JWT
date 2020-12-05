@@ -34,7 +34,7 @@ $routes->get('/', 'Home::index');
 $routes->post('/auth/login', 'Auth::login');
 
 
-$routes->group('api',['namespace' => 'App\Controllers\API'],function ($routes){
+$routes->group('api',['namespace' => 'App\Controllers\API', 'filter'=> 'authFilter'],function ($routes){
 	$routes -> get('estudiante', 'Estudiante::index');
 	$routes -> post('estudiante/create', 'Estudiante::create');
 	$routes -> get('estudiante/edit/(:num)', 'Estudiante::edit/$1');

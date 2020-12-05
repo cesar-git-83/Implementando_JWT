@@ -29,7 +29,7 @@ class Auth extends BaseController
                 if(verifyPassword($password, $validateUsuario["password"])):
                     
                     $jwt = $this->generateJWT($validateUsuario);
-                    return $this->respond($jwt);
+                    return $this->respond(['Token' => $jwt], 201);
 
                 else:
                     return $this->failValidationError('Contraseña invalida');
@@ -50,6 +50,12 @@ class Auth extends BaseController
             'aud'=>base_url(),
             'iat'=> $time,
             'exp'=> $time + 120,
+
+            'data' =>[
+                'nombre'=>$usuario['nombre'],
+                'username'=>$usuario['username'],
+                'rol'=>$usuario['rol_id'],
+            ]
         ];
 
         $jwt = JWT::encode($payload, $key);
