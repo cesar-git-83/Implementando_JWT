@@ -7,14 +7,20 @@ class Profesor extends ResourceController
 {
     public function __construct(){
         $this->model= $this-> setModel(new ProfesorModel());
-
-
+        helper('access_rol');
     }
 
 	public function index()
 	{
-        $profesor = $this->model->findAll();
-		return $this->respond($profesor);
+        try {
+            if (!validateAccess(array('admin'), $this->request->getServer('HTTP_AUTHORIZATION')))
+            return $this->failserverError('El rol no tiene acceso a este recurso');
+            $profesor = $this->model->findAll();
+            return $this->respond($profesor);
+            
+         } catch (\Exception $e) {
+            return $this->failserverError('Ha ocurrido un error con el servidor');
+        }
     }
     public function create()
     {

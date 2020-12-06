@@ -7,7 +7,7 @@ use Firebase\JWT\JWT;
 
 class Auth extends BaseController
 {
-    use ResponseTrait;
+    use ResponseTrair;
 
     public function __construct(){
         helper('secure_password');

@@ -1,6 +1,7 @@
 <?php
 namespace App\Filters;
 
+use App\Models\RolModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -16,8 +17,10 @@ class AuthFilter implements FilterInterface{
     public function before(RequestInterfase $request, $arguments = null){
 
             try {
+
             $key = Services::getsecretKey();
             $authHeader = $request->getServer('HTTP_AUTHORIZATION');
+            
             if ($authHeader == null) {
                 return Services::response()->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED, 'No se ha enviado el JWT autorizado');
 
@@ -28,20 +31,14 @@ class AuthFilter implements FilterInterface{
 
                 $rolModel = new RolModel();
                 $rol = $rolModel->find($jwt->data->rol);
+                if ($rol == null) 
+                return Services::response()->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED, 'El rol del JWT es invalido');
 
-                if(rol == null)
-                    return Services::response()->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED, 'El rol del JWT es invalido');
-                
                 return true;
 
-            } 
+            }           
 
-        }catch (ExpiredException $ee) {
-
-            return Services::response()->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED, 'Su Token JWT ha expirado');
-        }         
-        
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return Services::response()->setStatusCode(ResponseInterface::HTTP__INTERNAL_SERVER_ERROR,'Ocurrio un error en el servidor al validar el token');        }
 
     }

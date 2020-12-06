@@ -7,12 +7,13 @@ class Grado extends ResourceController
 {
     public function __construct(){
         $this->model= $this-> setModel(new GradoModel());
-
-
+        helper('access_rol');
     }
 
 	public function index()
 	{
+        if (!validateAccess(array('admin'), $this->request->getServer('HTTP_AUTHORIZATION')))
+        return $this->failserverError('El rol no tiene acceso a este recurso');
         $grado = $this->model->findAll();
 		return $this->respond($grado);
     }

@@ -37,7 +37,7 @@ class Filters extends BaseConfig
 
 		'authFilter' =>[
 			'before'=>[
-				'api/*'
+				'api'
 			]
 		]
 	];

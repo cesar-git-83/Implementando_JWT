@@ -21,6 +21,11 @@ class EstudianteModel extends Model
         'carnet'        => 'required|alpha_numeric_space|min_length[9]|max_leght[9]',
         'grado_id'      => 'required|integer|is_valid_grado',
     ];   
+    protected $validationMessages = [
+        'carnet'      =>  [
+            'valid_carnet' => 'Estimado usuario, debe ingresar un Carnet valido.'
+        ]
+    ];
     protected $skipValidation = false;
 
 }
