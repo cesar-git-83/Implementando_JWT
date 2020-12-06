@@ -8,14 +8,11 @@ class Estudiante extends ResourceController
     public function __construct(){
         $this->model= $this-> setModel(new EstudianteModel());
         helper('access_rol');
-       
-
-
     }
 
     public function index(){
     try {
-        if (!validateAccess(array('admin'), $this->request->getServer('HTTP_AUTHORIZATION')))
+        if (!validateAccess(array('admin', 'teacher'), $this->request->getServer('HTTP_AUTHORIZATION')))
         return $this->failserverError('El rol no tiene acceso a este recurso');
         $estudiante = $this->model->findAll();
         return $this->respond($estudiante);
@@ -24,9 +21,7 @@ class Estudiante extends ResourceController
         return $this->failserverError('Ha ocurrido un error con el servidor');
     }
       	
-        
 	}
-
 	public function create()
     {
         try {

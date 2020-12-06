@@ -1,29 +1,33 @@
-<?php 
+<?php
 
+use App\Models\RolModel;
 use Config\Services;
 use Firebase\JWT\JWT;
-use App\Models\RolModel;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
 
-function validateAccess($roles, $authHeader)
-{
-    if(!is_array($roles))
+function validateAccess($roles, $authHeader){
+    
+    if (!is_array($roles)) 
     return false;
+    
+    $key = Services::getSecretKey();
 
-    $key = Services::getsecretKey();
-    $arr = explode(' ', $authHeader);
-    $jwt = $arr[1];
-    $jwt = JWT::decode($jwt, $key, ['HS256']);
+        $arr = explode('', $authHeader);
+        $jwt = $arr[1];
+        $jwt = JWT::decode($jwt, $key, ['HS256']);
 
-    $rolModel = new RolModel();
-    $rol = $rolModel->find($jwt->data->rol);
+        $rolModel = new RolModel();
+                $rol = $rolModel->find($jwt->data->rol);
 
-    if(rol == null)
+                if ($rol == null) 
+                    return Services::response()->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED, 'El rol del JWT es invalido');
+
+                    return false;
+
+    if(!in_array($rol["nombre"], $roles))
         return false;
 
-    foreach ($roles as $key => $value):
-        if($value != $rol["nombre"])
-            return false;
-    endforeach;
     return true;
 
 }
